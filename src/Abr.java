@@ -48,7 +48,7 @@ public Abr (int x)
         return a;
     }
 
- 
+
     public void insertion(int value) {
         if (value == GetValue())
             System.out.println(" la valeur existe déja");
@@ -75,12 +75,26 @@ public Abr (int x)
     public void ParcoursInfixe() {
         if (FG() != null)
             FG().ParcoursInfixe();
-        System.out.println(GetValue()+"\n");
-        System.out.println("/");
-        System.out.println("/");
+        System.out.println(GetValue());
+
 
         if (FD() != null)
             FD().ParcoursInfixe();
+    }
+    public static int hauteur(Abr a) {
+        if (a == null)
+            return 0;
+        else
+            return (1 + Math.max(hauteur(a.FG()), hauteur(a.FD())));
+    }
+    public boolean recherche(int value) {
+        if (value == GetValue())
+            return true;
+        if ((value < GetValue()) && (FG() != null))
+            return (FG().recherche(value));
+        if ((value > GetValue()) && (FD() != null))
+            return (FD().recherche(value));
+        return false;
     }
 }
 

@@ -16,12 +16,12 @@ public Abr (int x)
         a.Fd=null;
     }
     // GetFils Gauche
-    public Abr GetFG()
+    public Abr FG()
     {
         return (Fg);
     }
     //GetFilsDroit
-    public Abr GetFD()
+    public Abr FD()
     {
         return (Fd);
     }
@@ -53,34 +53,34 @@ public Abr (int x)
         if (value == GetValue())
             System.out.println(" la valeur existe déja");
         if (value < GetValue()) {
-            if (GetFG() != null)
-                GetFG().insertion(value);
+            if (FG() != null)
+                FG().insertion(value);
             else
                 Fg = new Abr(value);
         }
         if (value > GetValue()) {
-            if (GetFD() != null)
-                GetFD().insertion(value);
+            if (FD() != null)
+                FD().insertion(value);
             else
                 Fd = new Abr(value);
         }
     }
     public void ParcoursPrefixe() {
         System.out.println(GetValue());
-        if (GetFG() != null)
-            GetFG().ParcoursPrefixe();
-        if (GetFD() != null)
-            GetFD().ParcoursPrefixe();
+        if (FG() != null)
+            FG().ParcoursPrefixe();
+        if (FD() != null)
+            FD().ParcoursPrefixe();
     }
     public void ParcoursInfixe() {
-        if (GetFG() != null)
-            GetFG().ParcoursInfixe();
+        if (FG() != null)
+            FG().ParcoursInfixe();
         System.out.println(GetValue()+"\n");
         System.out.println("/");
         System.out.println("/");
 
-        if (GetFD() != null)
-            GetFD().ParcoursInfixe();
+        if (FD() != null)
+            FD().ParcoursInfixe();
     }
 }
 

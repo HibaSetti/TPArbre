@@ -87,6 +87,7 @@ public Abr (int x)
         else
             return (1 + Math.max(hauteur(a.FG()), hauteur(a.FD())));
     }
+    //fct recherche
     public boolean recherche(int value) {
         if (value == GetValue())
             return true;

@@ -11,7 +11,9 @@ public Abr (int x)
     //Creer un arbre
     public void CreerArbre ( Abr a)
     {
-        a=null;
+        a.Pere=null;
+        a.Fg=null;
+        a.Fd=null;
     }
     // GetFils Gauche
     public Abr FG()
@@ -46,28 +48,10 @@ public Abr (int x)
         return a;
     }
 
-    /*Ajouter Noeud
-    public Abr Insert(Abr a, int x)
-    {
-        if ( a!= null)
-        {
-            if ( x == GetValue())
-                System.out.println(" la valeur existe déja");
-            else
-            {
-                if (x > GetValue())
-
-
-            }
-        }
-        else {
-            a.val = x;
-        }
-    }
-    */
+ 
     public void insertion(int value) {
         if (value == GetValue())
-            return;  // la valeur est deja dans l'arbre
+            System.out.println(" la valeur existe déja");
         if (value < GetValue()) {
             if (FG() != null)
                 FG().insertion(value);
@@ -81,6 +65,22 @@ public Abr (int x)
                 Fd = new Abr(value);
         }
     }
+    public void ParcoursPrefixe() {
+        System.out.println(GetValue());
+        if (FG() != null)
+            FG().ParcoursPrefixe();
+        if (FD() != null)
+            FD().ParcoursPrefixe();
+    }
+    public void ParcoursInfixe() {
+        if (FG() != null)
+            FG().ParcoursInfixe();
+        System.out.println(GetValue()+"\n");
+        System.out.println("/");
+        System.out.println("/");
 
+        if (FD() != null)
+            FD().ParcoursInfixe();
+    }
 }
 

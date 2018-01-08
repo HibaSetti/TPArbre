@@ -97,5 +97,88 @@ public Abr (int x)
             return (FD().recherche(value));
         return false;
     }
+
+    public void suppression (Abr a,int Valeur){
+    Abr Tree =new Abr(0);
+
+        if (Valeur < a.val)//recherche au niveau de sous arbre gauche
+        {   if(a.Fg==null)
+                {
+                   System.out.println("La valeur n'xiste pas");
+                }
+             else
+        {
+
+
+                 if(Valeur == Fg.val)
+                 {
+
+                     /* CORRECTE ****/
+
+                     if((Fg.Fg==null)&&(Fg.Fd==null))
+                     {
+                        Fg.Pere=null;
+                        a.Fg=null;
+
+                     }
+                     else
+                     {
+
+
+                        if((Fg.Fg!= null)&&(Fg.Fd==null))
+                        {
+                            Fg.Pere=null;
+                            Pere.Fg=Fg.Fg;
+                            Fg.Pere=Pere;
+                            Fg.Fg=null;
+
+
+                        }
+                        else if((Fg.Fd!= null)&&(Fg.Fg==null))
+                        {
+                            Fg.Pere=null;
+                            Pere.Fg=Fg.Fd;
+                            Fg.Pere=Pere;//?
+                            Fg.Fd=null;
+
+                        }
+                        else //avoir deux fils
+                        {
+
+                        }
+
+
+                     }
+                 }
+                 else
+                     suppression(Fg,Valeur);
+        }
+        }
+        else if (Valeur >a.val)
+        {
+            if(Valeur==Fd.val)
+            {
+                    if((Fd.Fd==null)&&(Fd.Fg==null))
+                    {
+
+                    }
+
+
+                    else
+                    {
+
+                    }
+            }
+            else
+            {
+                suppression(Fd,Valeur);
+            }
+        }
+        else  // égualité
+        {
+
+        }
+
+    }
 }
 

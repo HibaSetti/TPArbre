@@ -47,6 +47,11 @@ public Abr (int x)
         a.Fd=b;
         return a;
     }
+    public Abr AffPere(Abr a,Abr b)
+    {
+        a.Pere=b.Pere;
+        return a;
+    }
 
 
     public void insertion(int value) {
@@ -97,7 +102,51 @@ public Abr (int x)
             return (FD().recherche(value));
         return false;
     }
+    public  Abr PlusPetitGauche(Abr a)
+    {
+        Abr Tree=new Abr(0);
+        if ((a.Fd==null)&&(a.Fg==null))
+        {
+            AffInfo(Tree,a.val);
+            AffFg(Tree,a);
+            AffFd(Tree,a);
+            AffPere(Tree,a);
+        }
+        else
+        {
+            PlusPetitGauche(a.Fg);
+        }
+        return Tree;
+    }
+    public Abr PapaPPG(Abr a)
+    {
+        Abr Tree=new Abr(0);
+        if ((a.Fd.Fd==null)&&(a.Fd.Fg==null))
 
+        {
+            return (Tree.Fd);
+        }
+        else
+            {
+
+
+              PapaPPG(a.Fd);
+              return(null);
+            }
+    }
+    public void SuppressionCasDeuxFils(Abr a)
+    {
+        Abr Tree=new Abr(0);
+        Tree= PlusPetitGauche(a);
+        AffPere(Tree,a);
+        AffFg(Tree,a);
+        AffFd(Tree,a);
+        AffInfo(Tree,a.val);
+        AffFd(a.Pere,Tree);
+        a=null;
+
+
+    }
     public void suppression (Abr a,int Valeur){
     Abr Tree =new Abr(0);
 
@@ -125,25 +174,30 @@ public Abr (int x)
                      {
 
 
+                         /* CORRECTE */
                         if((Fg.Fg!= null)&&(Fg.Fd==null))
                         {
                             Fg.Pere=null;
-                            Pere.Fg=Fg.Fg;
-                            Fg.Pere=Pere;
+                            a.Fg=Fg.Fg;
+                            Fg.Fg=a;
                             Fg.Fg=null;
 
 
                         }
+                        /* CORRECTE */
                         else if((Fg.Fd!= null)&&(Fg.Fg==null))
                         {
                             Fg.Pere=null;
-                            Pere.Fg=Fg.Fd;
-                            Fg.Pere=Pere;//?
+                            a.Fg=Fg.Fd;
+                            a.Fg.Pere=a;
                             Fg.Fd=null;
 
                         }
-                        else //avoir deux fils
+                        else //avoir deux fils revoir
                         {
+
+
+                            SuppressionCasDeuxFils(a.Fd);
 
                         }
 
@@ -156,27 +210,60 @@ public Abr (int x)
         }
         else if (Valeur >a.val)
         {
-            if(Valeur==Fd.val)
+            if(a.Fd==null)
             {
-                    if((Fd.Fd==null)&&(Fd.Fg==null))
-                    {
-
-                    }
-
-
-                    else
-                    {
-
-                    }
+                System.out.println("la valeur n'existe pas");
             }
             else
             {
-                suppression(Fd,Valeur);
-            }
+
+
+                    if(Valeur==Fd.val)
+                    {
+                            if((Fd.Fd==null)&&(Fd.Fg==null))
+                            {
+                               Fd.Pere=null;
+                               a.Fd=null;
+                            }
+
+
+                            else
+                            {
+                                if((Fd.Fd== null)&&(Fd.Fg!=null))
+                                {
+                                    //remplir
+                                }
+                                else
+                                {
+                                    if ((Fd.Fd!=null)&&(Fd.Fg==null))
+                                    {
+                                            Fd.Pere=null;
+                                            a.Fd=Fd.Fd;
+                                            Fd.Fd=a;
+                                            Fd.Fd=null;
+
+                                    }
+                                    else if((Fd.Fd!=null)&&(Fd.Fg!=null))
+                                    {
+
+                                        SuppressionCasDeuxFils(a.Fd);
+                                    }
+                                }
+                            }
+                    }
+                    else
+                    {
+
+                        suppression(Fd,Valeur);
+                    }
+        }
         }
         else  // égualité
         {
-
+            if((a.Pere==null)&&(a.Fd==null)&&(a.Fg==null))
+            {
+                a=null;
+            }
         }
 
     }
